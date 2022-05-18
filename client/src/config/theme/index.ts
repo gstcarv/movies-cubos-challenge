@@ -6,6 +6,7 @@ export const theme = {
             400: '#F2F2F2',
             500: '#EBEBEB',
             700: '#BFBFBF',
+            800: '#878787',
         },
     },
 
