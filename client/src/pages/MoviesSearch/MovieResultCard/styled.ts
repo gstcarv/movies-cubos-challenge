@@ -7,8 +7,8 @@ export const CardContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.gray[400]};
 `;
 
-export const CardImageContainer = styled.div`
-    background-image: url('https://upload.wikimedia.org/wikipedia/pt/7/7d/Thor_Ragnarok_poster.jpg');
+export const CardImageContainer = styled.div<{ posterUrl: string }>`
+    background-image: url(${(props) => props.posterUrl});
     width: 250px;
     background-size: cover;
     background-position: center center;

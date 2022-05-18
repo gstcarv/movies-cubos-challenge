@@ -1,4 +1,5 @@
 import Badge from '../../../components/Core/Badge';
+import { MovieInfo } from '../../../types/movie-info';
 import {
     CardContainer,
     CardImageContainer,
@@ -12,31 +13,29 @@ import {
     CardRate,
     MovieGenderContainer,
 } from './styled';
+import moment from 'moment';
+import { MovieUtils } from '../../../utils/movie-utils';
 
-type Props = {};
+type Props = {
+    movie: MovieInfo;
+};
 
-export default function MovieResultCard({}: Props) {
+export default function MovieResultCard({ movie }: Props) {
     return (
         <CardContainer>
-            <CardImageContainer />
+            <CardImageContainer posterUrl={MovieUtils.getMoviePosterUrl(movie)} />
             <CardInfoContainer>
                 <CardInfoContainerHeader>
                     <CardRate percentage={20} />
 
                     <CardInfoHeaderTitle>
-                        <CardMovieName>Thor: Ragnarok</CardMovieName>
-                        <CardMovieDate>23/04/2002</CardMovieDate>
+                        <CardMovieName>{movie.title}</CardMovieName>
+                        <CardMovieDate>{moment(movie.release_date).format('DD/MM/YYYY')}</CardMovieDate>
                     </CardInfoHeaderTitle>
                 </CardInfoContainerHeader>
 
                 <CardInfoContainerContent>
-                    <CardMovieDescription>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta, placeat nostrum esse
-                        reprehenderit ipsa id laborum ad, accusantium alias quidem maiores fuga nam, dolorum vero
-                        exercitationem ea deleniti magnam suscipit. Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Dicta, placeat nostrum esse reprehenderit ipsa id laborum ad, accusantium alias quidem
-                        maiores fuga nam, dolorum vero exercitationem ea deleniti magnam suscipit.
-                    </CardMovieDescription>
+                    <CardMovieDescription>{movie.overview}</CardMovieDescription>
 
                     <MovieGenderContainer>
                         <Badge>Ação</Badge>
