@@ -24,7 +24,7 @@ export default function MoviesSearch({}: Props) {
 
             <MoviesContainer>
                 {moviesState.movies.map((movie) => (
-                    <MovieResultCard movie={movie} />
+                    <MovieResultCard movie={movie} key={movie.id} />
                 ))}
             </MoviesContainer>
         </Container>

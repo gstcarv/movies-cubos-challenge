@@ -22,20 +22,22 @@ type Props = {
 
 export default function MovieResultCard({ movie }: Props) {
     return (
-        <CardContainer>
+        <CardContainer data-testid='movie-card'>
             <CardImageContainer posterUrl={MovieUtils.getMoviePosterUrl(movie)} />
             <CardInfoContainer>
                 <CardInfoContainerHeader>
-                    <CardRate percentage={20} />
+                    <CardRate percentage={movie.vote_average} />
 
                     <CardInfoHeaderTitle>
-                        <CardMovieName>{movie.title}</CardMovieName>
-                        <CardMovieDate>{moment(movie.release_date).format('DD/MM/YYYY')}</CardMovieDate>
+                        <CardMovieName data-testid='movie-title'>{movie.title}</CardMovieName>
+                        <CardMovieDate data-testid='movie-date'>
+                            {moment(movie.release_date).format('DD/MM/YYYY')}
+                        </CardMovieDate>
                     </CardInfoHeaderTitle>
                 </CardInfoContainerHeader>
 
                 <CardInfoContainerContent>
-                    <CardMovieDescription>{movie.overview}</CardMovieDescription>
+                    <CardMovieDescription data-testid='movie-description'>{movie.overview}</CardMovieDescription>
 
                     <MovieGenderContainer>
                         <Badge>Ação</Badge>
