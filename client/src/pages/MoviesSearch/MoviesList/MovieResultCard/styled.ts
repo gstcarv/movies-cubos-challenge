@@ -5,6 +5,12 @@ export const CardContainer = styled.div`
     display: flex;
     min-height: 400px;
     background-color: ${({ theme }) => theme.colors.gray[400]};
+    transition: filter 0.2s;
+
+    :hover {
+        filter: brightness(0.8);
+        cursor: pointer;
+    }
 `;
 
 export const CardImageContainer = styled.div<{ posterUrl: string }>`
