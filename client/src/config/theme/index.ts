@@ -14,4 +14,9 @@ export const theme = {
         text: 'Lato',
         body: 'Abel',
     },
+
+    breakpoints: {
+        md: '992px',
+        sm: '687px',
+    },
 };
