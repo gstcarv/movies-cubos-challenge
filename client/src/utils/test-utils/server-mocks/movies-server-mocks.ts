@@ -1,7 +1,7 @@
 import { base, server } from '.';
 import { rest } from 'msw';
-import { getDetailedMovieMock, getMovieListMock } from '../mocks/movie-mocks';
-import { MoviesApiResponse } from '../../../types/response/movie-api-response';
+import { getDetailedMovieMock, getMovieListMock, getMovieVideosMock } from '../mocks/movie-mocks';
+import { MoviesApiResponse, MovieVideosApiResponse } from '../../../types/response/movie-api-response';
 
 export const MoviesServerMocks = {
     handleSuccessMoviesFetch: () => {
@@ -46,5 +46,19 @@ export const MoviesServerMocks = {
 
     handleErrorMovieDetailsFetch: () => {
         server.use(rest.get(base('/3/movie/:id'), (req, res, ctx) => res(ctx.status(404), ctx.delay(200))));
+    },
+
+    handleSuccessVideoFetch: () => {
+        server.use(
+            rest.get(base('/3/movie/1/videos'), (req, res, ctx) =>
+                res(
+                    ctx.status(200),
+                    ctx.delay(200),
+                    ctx.json({
+                        results: getMovieVideosMock(),
+                    } as MovieVideosApiResponse)
+                )
+            )
+        );
     },
 };

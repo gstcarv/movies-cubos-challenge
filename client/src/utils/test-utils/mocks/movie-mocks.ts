@@ -1,4 +1,5 @@
 import { DetailedMovieInfo, MovieInfo } from '../../../types/movie-info';
+import { VideoData } from '../../../types/video-data';
 import { getGenreListMock } from './genres-mocks';
 
 export const getMovieMock = (): MovieInfo => ({
@@ -31,6 +32,16 @@ export const getDetailedMovieMock = (): DetailedMovieInfo => ({
     runtime: 60,
     status: 'Released',
 });
+
+export const getMovieVideosMock = (): VideoData[] => [
+    {
+        key: 'video-key',
+        name: 'video-name',
+        published_at: new Date().toISOString(),
+        site: 'YouTube',
+        size: 560,
+    },
+];
 
 export const getMovieListMock = (): MovieInfo[] =>
     new Array(4).fill(getMovieMock()).map((d) => ({ ...d, id: Math.random() * 999999 }));

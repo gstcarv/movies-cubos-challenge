@@ -17,6 +17,7 @@ describe('<MovieDetails />', () => {
         const { getByText } = render(<MovieDetails />);
 
         MoviesServerMocks.handleSuccessMovieDetailsFetch();
+        MoviesServerMocks.handleSuccessVideoFetch();
 
         await waitFor(() => {
             expect(getByText(mockMovie.title)).toBeInTheDocument();
