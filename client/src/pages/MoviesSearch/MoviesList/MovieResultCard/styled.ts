@@ -15,6 +15,7 @@ export const CardContainer = styled.div`
 
 export const CardImageContainer = styled.div<{ posterUrl: string }>`
     background-image: url(${(props) => props.posterUrl});
+    background-color: ${(props) => props.theme.colors.gray[700]};
     width: 250px;
     background-size: cover;
     background-position: center center;

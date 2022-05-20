@@ -9,6 +9,10 @@ type MoviesStateModel = {
     loading: boolean;
     error: boolean;
     totalPages: number;
+    options: {
+        search: string;
+        page: number;
+    };
 };
 
 export const moviesModel = createModel<RootModel>()({
@@ -17,15 +21,23 @@ export const moviesModel = createModel<RootModel>()({
         totalPages: 1,
         loading: false,
         error: false,
+        options: {
+            page: 1,
+            search: '',
+        },
     } as MoviesStateModel,
 
     reducers: {
-        onMoviesFetchSuccess(state, payload: { movies: MovieInfo[]; totalPages: number }) {
+        onMoviesFetchSuccess(state, payload: { response: MoviesApiResponse; search: string }) {
             return {
                 ...state,
                 loading: false,
-                movies: payload.movies,
-                totalPages: payload.totalPages,
+                movies: payload.response.results,
+                totalPages: payload.response.total_pages,
+                options: {
+                    search: payload.search,
+                    page: payload.response.page,
+                },
             };
         },
 
@@ -43,6 +55,26 @@ export const moviesModel = createModel<RootModel>()({
                 loading: true,
             };
         },
+
+        updateSearch(state, search: string) {
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    search,
+                },
+            };
+        },
+
+        updatePage(state, page: number) {
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    page,
+                },
+            };
+        },
     },
 
     effects: (dispatch) => ({
@@ -58,10 +90,7 @@ export const moviesModel = createModel<RootModel>()({
                     result = (await MovieApi.searchMovies(payload.search, { page: payload.page })).data;
                 }
 
-                dispatch.movies.onMoviesFetchSuccess({
-                    movies: result.results,
-                    totalPages: result.total_pages,
-                });
+                dispatch.movies.onMoviesFetchSuccess({ response: result, search: payload.search ?? '' });
             } catch (err) {
                 dispatch.movies.onMoviesFetchError();
             }

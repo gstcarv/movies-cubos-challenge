@@ -11,6 +11,7 @@ export const MovieBody = styled.div`
 export const MovieImage = styled.div<{ posterUrl: string }>`
     width: 430px;
     background-image: url(${(props) => props.posterUrl});
+    background-color: ${(props) => props.theme.colors.gray[700]};
     background-size: cover;
     background-position: center center;
 `;

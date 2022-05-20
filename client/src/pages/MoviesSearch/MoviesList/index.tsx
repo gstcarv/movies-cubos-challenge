@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { MoviesContainer, PaginationContainer, Container, NoResultsContainer } from './styled';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -11,38 +11,39 @@ type Props = {
     searchText: string;
 };
 
-export default function MoviesList({ searchText }: Props) {
+function MoviesList({ searchText }: Props) {
     const dispatch = useDispatch<Dispatch>();
-    const moviesState = useSelector((state: RootState) => state.movies);
 
-    const [currentPage, setCurrentPage] = useState(1);
-
-    // set first page on change search text
-    useEffect(() => setCurrentPage(1), [searchText]);
+    const movies = useSelector((state: RootState) => state.movies.movies);
+    const isLoading = useSelector((state: RootState) => state.movies.loading);
+    const currentPage = useSelector((state: RootState) => state.movies.options.page);
+    const totalPages = useSelector((state: RootState) => state.movies.totalPages);
 
     // scroll to top of window on change page
     useEffect(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [currentPage]);
 
     useEffect(() => {
-        dispatch.movies.fetchMoviesAsync({
-            search: searchText,
-            page: currentPage,
-        });
+        if (!isLoading) {
+            dispatch.movies.fetchMoviesAsync({
+                search: searchText,
+                page: currentPage,
+            });
+        }
     }, [searchText, currentPage]);
 
     return (
         <Container>
-            {moviesState.loading && <Skeleton height={300} width={'100%'} count={5} />}
+            {isLoading && <Skeleton height={300} width={'100%'} count={5} />}
 
-            {!moviesState.loading && moviesState.movies.length > 0 && (
+            {!isLoading && movies.length > 0 && (
                 <MoviesContainer>
-                    {moviesState.movies.map((movie) => (
+                    {movies.map((movie) => (
                         <MovieResultCard movie={movie} key={movie.id} />
                     ))}
                 </MoviesContainer>
             )}
 
-            {!moviesState.loading && moviesState.movies.length === 0 && (
+            {!isLoading && movies.length === 0 && (
                 <NoResultsContainer data-testid='empty-movies-message'>
                     <img src={require('../../../assets/images/no-results.png')} width={250} alt='No result found' />
 
@@ -50,11 +51,11 @@ export default function MoviesList({ searchText }: Props) {
                 </NoResultsContainer>
             )}
 
-            {moviesState.totalPages > 0 && (
+            {totalPages > 0 && (
                 <PaginationContainer>
                     <Pagination
-                        pageCount={moviesState.totalPages ?? 1}
-                        onPageChange={(p) => setCurrentPage(p.selected)}
+                        pageCount={totalPages ?? 1}
+                        onPageChange={(p) => dispatch.movies.updatePage(p.selected)}
                         forcePage={currentPage ?? 1}
                     />
                 </PaginationContainer>
@@ -62,3 +63,5 @@ export default function MoviesList({ searchText }: Props) {
         </Container>
     );
 }
+
+export default memo(MoviesList);

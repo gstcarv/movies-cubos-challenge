@@ -16,7 +16,7 @@ describe('<MoviesSearch />', () => {
     });
 
     test('should run a new search request on search field changed ', async () => {
-        const { getByTestId, queryAllByTestId } = render(<MovieResultCard />);
+        const { getByTestId, queryAllByTestId, getByDisplayValue } = render(<MovieResultCard />);
 
         MoviesServerMocks.handleEmptyResultsMoviesFetch();
         GenreServerMocks.handleSuccessGenreListRequest();
@@ -31,8 +31,15 @@ describe('<MoviesSearch />', () => {
 
         fireEvent.change(searchField, { target: { value: 'mock-search-text' } });
 
-        await waitFor(() => {
-            expect(queryAllByTestId('movie-card')).toHaveLength(getMovieListMock().length);
-        });
+        expect(getByDisplayValue('mock-search-text')).toBeInTheDocument();
+
+        await waitFor(
+            () => {
+                expect(queryAllByTestId('movie-card')).toHaveLength(getMovieListMock().length);
+            },
+            {
+                timeout: 2000,
+            }
+        );
     });
 });
