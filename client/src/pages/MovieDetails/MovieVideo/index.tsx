@@ -1,8 +1,17 @@
 import React from 'react';
+import { useMovieDetails } from '..';
 
 type Props = {};
 
 export default function MovieVideo({}: Props) {
+    const {
+        movieDetails: { video },
+    } = useMovieDetails();
+
+    if (!video) {
+        return null;
+    }
+
     return (
         <>
             <iframe

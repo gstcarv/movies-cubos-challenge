@@ -8,7 +8,7 @@ type Props = {
 
 export default function MovieRateCircle({ percentage, className }: Props) {
     return (
-        <CircleContainer className={className}>
+        <CircleContainer className={className} data-testid='movie-rate-circle'>
             <PercentageContainer>
                 <PercentageText>{percentage}%</PercentageText>
             </PercentageContainer>

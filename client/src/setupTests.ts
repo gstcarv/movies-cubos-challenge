@@ -11,3 +11,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 window.scrollTo = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    useNavigate: jest.fn,
+}));

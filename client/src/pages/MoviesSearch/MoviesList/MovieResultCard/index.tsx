@@ -1,4 +1,3 @@
-import Badge from '../../../../components/Core/Badge';
 import { MovieInfo } from '../../../../types/movie-info';
 import {
     CardContainer,

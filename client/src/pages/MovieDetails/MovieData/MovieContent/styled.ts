@@ -7,6 +7,7 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.colors.gray[400]};
     position: relative;
     min-height: 480px;
+    width: 100%;
 `;
 
 export const TitleLabel = styled.h3`

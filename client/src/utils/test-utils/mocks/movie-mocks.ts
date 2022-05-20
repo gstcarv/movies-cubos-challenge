@@ -1,4 +1,5 @@
-import { MovieInfo } from '../../../types/movie-info';
+import { DetailedMovieInfo, MovieInfo } from '../../../types/movie-info';
+import { getGenreListMock } from './genres-mocks';
 
 export const getMovieMock = (): MovieInfo => ({
     genre_ids: [],
@@ -11,6 +12,24 @@ export const getMovieMock = (): MovieInfo => ({
     video: true,
     vote_average: 10,
     vote_count: true,
+});
+
+export const getDetailedMovieMock = (): DetailedMovieInfo => ({
+    id: 1,
+    original_title: 'movie-original-title',
+    overview: 'movie-overview',
+    poster_path: '/poster-path.jpg',
+    release_date: new Date().toISOString(),
+    title: 'movie-title',
+    video: true,
+    vote_average: 10,
+    vote_count: true,
+    budget: 1000,
+    revenue: 3000,
+    genres: getGenreListMock(),
+    original_language: 'en',
+    runtime: 60,
+    status: 'Released',
 });
 
 export const getMovieListMock = (): MovieInfo[] =>

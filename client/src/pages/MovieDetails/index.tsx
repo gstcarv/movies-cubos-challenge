@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { createContext, useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { MovieApi } from '../../api/movie';
 import { DetailedMovieInfo } from '../../types/movie-info';
@@ -10,15 +10,26 @@ import { Container } from './styled';
 type Params = { id: string };
 
 type MovieDetailsContextType = {
-    movieDetails?: DetailedMovieInfo;
+    movieDetails: DetailedMovieInfo;
 };
 
 const MovieDetailsContext = createContext<MovieDetailsContextType>({} as MovieDetailsContextType);
 
 export default function MovieDetails() {
     const { id } = useParams<Params>();
+    const navigate = useNavigate();
 
-    const { data: movieDetails } = useSWR(['movie', id], async () => (await MovieApi.getDetails(Number(id))).data);
+    const { data: movieDetails, error } = useSWR(
+        ['movie', id],
+        async () => (await MovieApi.getDetails(Number(id))).data
+    );
+
+    // exit from page if the movie details was not found
+    useEffect(() => {
+        if (error && !movieDetails) {
+            navigate('/');
+        }
+    }, [error, movieDetails]);
 
     if (!movieDetails) {
         return null;

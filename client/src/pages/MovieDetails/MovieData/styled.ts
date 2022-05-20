@@ -8,9 +8,9 @@ export const MovieBody = styled.div`
     display: flex;
 `;
 
-export const MovieImage = styled.div`
-    width: 500px;
-    background: url('https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg');
+export const MovieImage = styled.div<{ posterUrl: string }>`
+    width: 430px;
+    background-image: url(${(props) => props.posterUrl});
     background-size: cover;
     background-position: center center;
 `;

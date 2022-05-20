@@ -1,5 +1,3 @@
-import MovieResultCard from '.';
-import moment from 'moment';
 import { render } from '../../../config/test';
 import Pagination from '.';
 import { fireEvent } from '@testing-library/react';
