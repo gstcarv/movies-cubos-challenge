@@ -46,7 +46,7 @@ export default function MoviesList({ searchText }: Props) {
                 <NoResultsContainer data-testid='empty-movies-message'>
                     <img src={require('../../../assets/images/no-results.png')} width={250} alt='No result found' />
 
-                    <h1>No results found, try search for something else</h1>
+                    <h1>Nenhum resultado encontrado. Pesquise por outra coisa!</h1>
                 </NoResultsContainer>
             )}
 

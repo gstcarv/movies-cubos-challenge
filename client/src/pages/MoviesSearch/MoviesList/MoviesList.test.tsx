@@ -25,12 +25,13 @@ describe('<MoviesList />', () => {
     });
 
     test('should render empty results message if no results found', async () => {
-        const { getByTestId } = render(<MoviesList searchText='' />);
+        const { getByTestId, getByText } = render(<MoviesList searchText='' />);
 
         MoviesServerMocks.handleEmptyResultsMoviesFetch();
 
         await waitFor(() => {
             expect(getByTestId('empty-movies-message')).toBeInTheDocument();
+            expect(getByText('Nenhum resultado encontrado. Pesquise por outra coisa!')).toBeInTheDocument();
         });
     });
 

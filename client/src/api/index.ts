@@ -7,6 +7,8 @@ api.interceptors.request.use((config) => {
         config.headers['Authorization'] = `Bearer ${process.env.REACT_APP_API_TOKEN}`;
     }
 
+    config.params = { ...config.params, language: 'pt-BR' };
+
     return config;
 }, Promise.reject);
 
