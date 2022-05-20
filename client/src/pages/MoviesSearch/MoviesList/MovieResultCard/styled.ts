@@ -72,11 +72,3 @@ export const CardMovieDescription = styled.p`
     color: ${({ theme }) => theme.colors.gray[800]};
     margin-bottom: 24px;
 `;
-
-export const MovieGenderContainer = styled.div`
-    display: flex;
-
-    > div {
-        margin-right: 8px;
-    }
-`;

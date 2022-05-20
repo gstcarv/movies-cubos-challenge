@@ -11,10 +11,10 @@ import {
     CardMovieDescription,
     CardMovieName,
     CardRate,
-    MovieGenderContainer,
 } from './styled';
 import moment from 'moment';
 import { MovieUtils } from '../../../../utils/movie-utils';
+import GenreBadgeList from '../../../../components/GenreBadgeList';
 
 type Props = {
     movie: MovieInfo;
@@ -39,12 +39,7 @@ export default function MovieResultCard({ movie }: Props) {
                 <CardInfoContainerContent>
                     <CardMovieDescription data-testid='movie-description'>{movie.overview}</CardMovieDescription>
 
-                    <MovieGenderContainer>
-                        <Badge>Ação</Badge>
-                        <Badge>Aventura</Badge>
-                        <Badge>Romance</Badge>
-                        <Badge>Mistério</Badge>
-                    </MovieGenderContainer>
+                    <GenreBadgeList genreIds={movie.genre_ids} />
                 </CardInfoContainerContent>
             </CardInfoContainer>
         </CardContainer>

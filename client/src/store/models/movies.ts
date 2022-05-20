@@ -1,8 +1,8 @@
-import { createModel, RematchDispatch } from '@rematch/core';
+import { createModel } from '@rematch/core';
 import { RootModel } from '../';
 import { MovieApi } from '../../api/movie';
 import { MovieInfo } from '../../types/movie-info';
-import { ApiResponse } from '../../types/server/api-response';
+import { MoviesApiResponse } from '../../types/response/movie-api-response';
 
 type MoviesStateModel = {
     movies: MovieInfo[];
@@ -50,7 +50,7 @@ export const moviesModel = createModel<RootModel>()({
             try {
                 dispatch.movies.onMoviesFetchBegin();
 
-                let result: ApiResponse<MovieInfo[]>;
+                let result: MoviesApiResponse;
 
                 if (!payload.search) {
                     result = (await MovieApi.fetchMovies({ page: payload.page })).data;

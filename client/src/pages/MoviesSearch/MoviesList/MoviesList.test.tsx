@@ -3,12 +3,15 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import { MoviesServerMocks } from '../../../utils/test-utils/server-mocks/movies-server-mocks';
 import { getMovieListMock } from '../../../utils/test-utils/mocks/movie-mocks';
 import MoviesList from '.';
+import { GenreServerMocks } from '../../../utils/test-utils/server-mocks/genres-server-mocks';
 
 const scrollToMock = jest.fn();
 
 window.scrollTo = scrollToMock;
 
 describe('<MoviesList />', () => {
+    beforeEach(() => GenreServerMocks.handleSuccessGenreListRequest());
+
     test('should render all fetched movies into the list', async () => {
         const { getAllByTestId } = render(<MoviesList searchText='' />);
 

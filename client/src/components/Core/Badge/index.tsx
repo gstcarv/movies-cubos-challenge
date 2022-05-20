@@ -7,5 +7,9 @@ type Props = {
 };
 
 export default function Badge({ children, className }: Props) {
-    return <Container className={className}>{children}</Container>;
+    return (
+        <Container data-testid='badge' className={className}>
+            {children}
+        </Container>
+    );
 }
