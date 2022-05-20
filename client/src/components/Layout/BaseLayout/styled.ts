@@ -10,10 +10,11 @@ export const HeaderContainer = styled.header`
     align-items: center;
 `;
 
-export const HeaderTitle = styled.h1`
+export const HeaderTitle = styled.a`
     margin: 0;
     color: ${({ theme }) => theme.colors.accent};
     font-size: 40px;
     font-family: ${({ theme }) => theme.fonts.body};
     font-weight: normal;
+    text-decoration: none;
 `;

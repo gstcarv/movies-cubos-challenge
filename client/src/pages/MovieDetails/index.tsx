@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { MovieApi } from '../../api/movie';
@@ -32,7 +33,7 @@ export default function MovieDetails() {
     }, [error, movieDetails]);
 
     if (!movieDetails) {
-        return null;
+        return <Skeleton height={550} style={{ marginTop: 36 }} />;
     }
 
     return (

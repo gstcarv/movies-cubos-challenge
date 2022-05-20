@@ -7,7 +7,7 @@ export default function BaseLayout({ children }: Props) {
     return (
         <Container>
             <HeaderContainer>
-                <HeaderTitle>Movies</HeaderTitle>
+                <HeaderTitle href='/'>Movies</HeaderTitle>
             </HeaderContainer>
 
             {children}
