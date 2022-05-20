@@ -2,8 +2,8 @@ import moment from 'moment';
 import { useMovieDetails } from '../../..';
 import { parseMovieStatus } from '../../../../../types/movie-status';
 import { TimeUtils } from '../../../../../utils/time-utils';
-import { ContentText, TitleLabel } from '../styled';
-import { Container, InfoTitle, InfoCol } from './styled';
+import { TitleLabel } from '../styled';
+import { Container, InfoTitle, InfoCol, InfoContentText } from './styled';
 
 type Props = {};
 
@@ -26,38 +26,38 @@ export default function MovieInformation({}: Props) {
             <Container>
                 <InfoCol>
                     <InfoTitle>Situação</InfoTitle>
-                    <ContentText data-testid='movie-status'>{parseMovieStatus(status)}</ContentText>
+                    <InfoContentText data-testid='movie-status'>{parseMovieStatus(status)}</InfoContentText>
                 </InfoCol>
 
                 <InfoCol>
                     <InfoTitle>Idioma</InfoTitle>
-                    <ContentText data-testid='movie-language'>{original_language.toUpperCase()}</ContentText>
+                    <InfoContentText data-testid='movie-language'>{original_language.toUpperCase()}</InfoContentText>
                 </InfoCol>
 
                 <InfoCol>
                     <InfoTitle>Duração</InfoTitle>
-                    <ContentText data-testid='movie-duration'>{getMovieDuration()}</ContentText>
+                    <InfoContentText data-testid='movie-duration'>{getMovieDuration()}</InfoContentText>
                 </InfoCol>
 
                 <InfoCol>
                     <InfoTitle>Orçamento</InfoTitle>
-                    <ContentText data-testid='movie-budget'>
+                    <InfoContentText data-testid='movie-budget'>
                         {budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                    </ContentText>
+                    </InfoContentText>
                 </InfoCol>
 
                 <InfoCol>
                     <InfoTitle>Receita</InfoTitle>
-                    <ContentText data-testid='movie-revenue'>
+                    <InfoContentText data-testid='movie-revenue'>
                         {revenue.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                    </ContentText>
+                    </InfoContentText>
                 </InfoCol>
 
                 <InfoCol>
                     <InfoTitle>Lucro</InfoTitle>
-                    <ContentText data-testid='movie-profit'>
+                    <InfoContentText data-testid='movie-profit'>
                         {calculateMovieProfit().toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
-                    </ContentText>
+                    </InfoContentText>
                 </InfoCol>
             </Container>
         </>
