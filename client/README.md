@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src="./docs/logo.svg" height="90px">
+  <h2 align="center">
+    Movies | Cubos Challenge
+  </h2>
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br />
 
-## Available Scripts
+<div margin="10px 0" align="center">
+    <img alt="Build passing badge" src="https://img.shields.io/badge/build-passing-brightgreen">
+    <img alt="Mainteiner badge" src="https://img.shields.io/badge/maintainer-Gustavo Carvalho-blue">
+    <img alt="React Based Badge" src="https://badges.aleen42.com/src/react.svg">
+</div>
 
-In the project directory, you can run:
+## 💎 About
 
-### `npm start`
+The <b>Movies</b> project is a challenge proposal by Cubos Tecnologia. The application was developed with React + Typescript using the most updated javascript features and CSS-in-JS styling strategy using Styled Components, with a high-scalable project structure, using the best code practices, from source code, using a structure that appreciates the reuse of code, together clean code writing and documentation whenever necessary, to best UX improvements, like good user feedback, error preventing, and consistency.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The source code is covered using unit tests made with Jest and React Testing Library, together with the MSW package, responsible for mocking HTTP Requests for the integration tests.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+All the data from the project is fetched from [The Movie DB](https://developers.themoviedb.org/3)
 
-### `npm test`
+The application is hosted at [https://cubos-movies.surge.sh/](https://cubos-movies.surge.sh/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 💻 Installing
 
-### `npm run build`
+To run the application locally, you'll need follow the steps
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone `gstcarv/movies-cubos-challenge/` project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+$ git clone https://github.com/gstcarv/movies-cubos-challenge.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Navigate to `empresas-web-client/client` folder
 
-### `npm run eject`
+```bash
+$ cd movies-cubos-challenge
+$ cd client
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Install the dependencies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+$ yarn install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+or
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+$ npm install
+```
 
-## Learn More
+## 🚀 Running
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Run the project using bash
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+$ yarn start
+
+or
+
+$ npm start
+```
+
+The application will work on `localhost:3000`
+
+## 🧪 Testing
+
+To run test, you can use the test script
+
+```bash
+$ yarn test
+
+or
+
+$ npm test
+```
+
+## 💙 Thanks
+
+Made with ❤️ by Gustavo Carvalho to cubos
+
+<img alt="License MIT" src="https://img.shields.io/badge/license-MIT-blue">
