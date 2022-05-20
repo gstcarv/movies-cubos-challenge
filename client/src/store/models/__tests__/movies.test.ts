@@ -7,7 +7,7 @@ describe('[movies] model', () => {
     it('fetchMoviesAsync effect should load data and save into state', async () => {
         MoviesServerMocks.handleSuccessMoviesFetch();
 
-        await store.dispatch.movies.fetchMoviesAsync(undefined);
+        await store.dispatch.movies.fetchMoviesAsync({ search: '', page: 1 });
 
         await waitFor(() => {
             const moviesData = store.getState().movies;

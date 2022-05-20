@@ -9,3 +9,5 @@ import { server } from './utils/test-utils/server-mocks';
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
+
+window.scrollTo = jest.fn();

@@ -1,5 +1,5 @@
-import Badge from '../../../components/Core/Badge';
-import { MovieInfo } from '../../../types/movie-info';
+import Badge from '../../../../components/Core/Badge';
+import { MovieInfo } from '../../../../types/movie-info';
 import {
     CardContainer,
     CardImageContainer,
@@ -14,7 +14,7 @@ import {
     MovieGenderContainer,
 } from './styled';
 import moment from 'moment';
-import { MovieUtils } from '../../../utils/movie-utils';
+import { MovieUtils } from '../../../../utils/movie-utils';
 
 type Props = {
     movie: MovieInfo;

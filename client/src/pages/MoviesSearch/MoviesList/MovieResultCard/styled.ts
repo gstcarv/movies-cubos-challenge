@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import MovieRateCircle from '../../../components/MovieRateCircle';
+import MovieRateCircle from '../../../../components/MovieRateCircle';
 
 export const CardContainer = styled.div`
     display: flex;
-    height: 400px;
+    min-height: 400px;
     background-color: ${({ theme }) => theme.colors.gray[400]};
 `;
 

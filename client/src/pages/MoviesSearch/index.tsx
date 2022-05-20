@@ -1,32 +1,20 @@
-import { useEffect } from 'react';
-import { Container, MoviesContainer } from './styled';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { Dispatch, RootState } from '../../store';
-
+import { useState } from 'react';
+import { Container } from './styled';
 import SearchField from '../../components/SearchField';
-import MovieResultCard from './MovieResultCard';
+import { useDebounce } from 'use-debounce';
+import MoviesList from './MoviesList';
 
 type Props = {};
 
 export default function MoviesSearch({}: Props) {
-    const dispatch = useDispatch<Dispatch>();
-
-    const moviesState = useSelector((state: RootState) => state.movies);
-
-    useEffect(() => {
-        dispatch.movies.fetchMoviesAsync(null);
-    }, []);
+    const [searchValue, setSearchValue] = useState('');
+    const [search] = useDebounce(searchValue, 700);
 
     return (
         <Container>
-            <SearchField onChange={(e) => console.log(e.target.value)} />
+            <SearchField onChange={(e) => setSearchValue(e.target.value)} value={searchValue} />
 
-            <MoviesContainer>
-                {moviesState.movies.map((movie) => (
-                    <MovieResultCard movie={movie} key={movie.id} />
-                ))}
-            </MoviesContainer>
+            <MoviesList searchText={search} />
         </Container>
     );
 }

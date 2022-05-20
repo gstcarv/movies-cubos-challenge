@@ -2,26 +2,30 @@ import { createModel, RematchDispatch } from '@rematch/core';
 import { RootModel } from '../';
 import { MovieApi } from '../../api/movie';
 import { MovieInfo } from '../../types/movie-info';
+import { ApiResponse } from '../../types/server/api-response';
 
 type MoviesStateModel = {
     movies: MovieInfo[];
     loading: boolean;
     error: boolean;
+    totalPages: number;
 };
 
 export const moviesModel = createModel<RootModel>()({
     state: {
         movies: [],
+        totalPages: 1,
         loading: false,
         error: false,
     } as MoviesStateModel,
 
     reducers: {
-        onMoviesFetchSuccess(state, movies: MovieInfo[]) {
+        onMoviesFetchSuccess(state, payload: { movies: MovieInfo[]; totalPages: number }) {
             return {
                 ...state,
                 loading: false,
-                movies: movies,
+                movies: payload.movies,
+                totalPages: payload.totalPages,
             };
         },
 
@@ -42,15 +46,22 @@ export const moviesModel = createModel<RootModel>()({
     },
 
     effects: (dispatch) => ({
-        async fetchMoviesAsync(payload, state) {
+        async fetchMoviesAsync(payload: { search?: string; page: number }, state) {
             try {
                 dispatch.movies.onMoviesFetchBegin();
 
-                const {
-                    data: { results },
-                } = await MovieApi.fetchMovies();
+                let result: ApiResponse<MovieInfo[]>;
 
-                dispatch.movies.onMoviesFetchSuccess(results);
+                if (!payload.search) {
+                    result = (await MovieApi.fetchMovies({ page: payload.page })).data;
+                } else {
+                    result = (await MovieApi.searchMovies(payload.search, { page: payload.page })).data;
+                }
+
+                dispatch.movies.onMoviesFetchSuccess({
+                    movies: result.results,
+                    totalPages: result.total_pages,
+                });
             } catch (err) {
                 dispatch.movies.onMoviesFetchError();
             }

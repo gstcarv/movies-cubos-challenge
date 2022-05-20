@@ -1,6 +1,6 @@
 import MovieResultCard from '.';
-import { render } from '../../../config/test';
-import { getMovieMock } from '../../../utils/test-utils/mocks/movie-mocks';
+import { render } from '../../../../config/test';
+import { getMovieMock } from '../../../../utils/test-utils/mocks/movie-mocks';
 import moment from 'moment';
 
 describe('<MovieResultCard />', () => {

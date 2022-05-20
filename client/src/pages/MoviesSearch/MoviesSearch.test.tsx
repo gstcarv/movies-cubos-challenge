@@ -1,20 +1,35 @@
+import { fireEvent, waitFor } from '@testing-library/react';
 import MovieResultCard from '.';
-import moment from 'moment';
 import { render } from '../../config/test';
-import { waitFor } from '@testing-library/react';
-import { MoviesServerMocks } from '../../utils/test-utils/server-mocks/movies-server-mocks';
 import { getMovieListMock } from '../../utils/test-utils/mocks/movie-mocks';
+import { MoviesServerMocks } from '../../utils/test-utils/server-mocks/movies-server-mocks';
 
-describe('<MovieResultCard />', () => {
-    test('should render all fetched movies into the list', async () => {
-        const { getAllByTestId } = render(<MovieResultCard />);
+describe('<MoviesSearch />', () => {
+    test('should render correctly', async () => {
+        const { getByTestId } = render(<MovieResultCard />);
 
         MoviesServerMocks.handleSuccessMoviesFetch();
 
+        expect(getByTestId('search-field')).toBeInTheDocument();
+    });
+
+    test('should run a new search request on search field changed ', async () => {
+        const { getByTestId, queryAllByTestId } = render(<MovieResultCard />);
+
+        MoviesServerMocks.handleEmptyResultsMoviesFetch();
+
         await waitFor(() => {
-            expect(getAllByTestId('movie-card')[0]).toBeInTheDocument();
+            expect(getByTestId('empty-movies-message')).toBeInTheDocument();
         });
 
-        expect(getAllByTestId('movie-card')).toHaveLength(getMovieListMock().length);
+        MoviesServerMocks.handleSuccessMoviesSearchFetch();
+
+        const searchField = getByTestId('search-field');
+
+        fireEvent.change(searchField, { target: { value: 'mock-search-text' } });
+
+        await waitFor(() => {
+            expect(queryAllByTestId('movie-card')).toHaveLength(getMovieListMock().length);
+        });
     });
 });
