@@ -2,26 +2,39 @@ import { useCallback } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import useSWR from 'swr';
 import { GenreApi } from '../../api/genre';
+import { GenreInfo } from '../../types/genre-info';
 import Badge from '../Core/Badge';
 import { MovieGenderContainer } from './styled';
 
-type Props = { genreIds: number[] };
+type Props = {
+    genreIds?: number[];
 
-export default function GenreBadgeList({ genreIds }: Props) {
-    const { data } = useSWR('genres', async () => (await GenreApi.fetchAllGenres()).data);
+    // preloaded genres data
+    genres?: GenreInfo[];
+};
+
+export default function GenreBadgeList({ genreIds = [], genres }: Props) {
+    // if genre provided, get their ids
+    const ids = genres?.map((g) => g.id) || genreIds;
+
+    const { data } = useSWR(
+        // don't request if genres already provided
+        !genres ? 'genres' : null,
+        async () => (await GenreApi.fetchAllGenres()).data
+    );
 
     const findGenreById = useCallback(
         (id: number) => {
-            return data?.genres.find((g) => g.id === id);
+            return (genres || data?.genres || []).find((g) => g.id === id);
         },
         [data]
     );
 
-    if (!data) {
+    if (!data && !genres) {
         // loading skeleton
         return (
             <MovieGenderContainer>
-                {genreIds.map((id) => (
+                {ids.map((id) => (
                     <Skeleton
                         key={id}
                         data-containerTestId='badges-loading'
@@ -36,7 +49,7 @@ export default function GenreBadgeList({ genreIds }: Props) {
 
     return (
         <MovieGenderContainer>
-            {genreIds.map((id) => (
+            {ids.map((id) => (
                 <Badge key={id}>{findGenreById(id)?.name || '-'}</Badge>
             ))}
         </MovieGenderContainer>

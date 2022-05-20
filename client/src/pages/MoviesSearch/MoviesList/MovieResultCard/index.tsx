@@ -15,14 +15,17 @@ import {
 import moment from 'moment';
 import { MovieUtils } from '../../../../utils/movie-utils';
 import GenreBadgeList from '../../../../components/GenreBadgeList';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     movie: MovieInfo;
 };
 
 export default function MovieResultCard({ movie }: Props) {
+    const navigate = useNavigate();
+
     return (
-        <CardContainer data-testid='movie-card'>
+        <CardContainer data-testid='movie-card' onClick={() => navigate(`movie/${movie.id}`)}>
             <CardImageContainer posterUrl={MovieUtils.getMoviePosterUrl(movie)} />
             <CardInfoContainer>
                 <CardInfoContainerHeader>

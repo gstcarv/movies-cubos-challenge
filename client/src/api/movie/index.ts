@@ -1,4 +1,5 @@
 import { api } from '..';
+import { DetailedMovieInfo } from '../../types/movie-info';
 import { MoviesApiResponse } from '../../types/response/movie-api-response';
 import { PagedQuery } from '../../types/server/paged-query';
 
@@ -18,5 +19,9 @@ export const MovieApi = {
                 page: options.page,
             },
         });
+    },
+
+    getDetails(id: number) {
+        return api.get<DetailedMovieInfo>(`/3/movie/${id}`);
     },
 };

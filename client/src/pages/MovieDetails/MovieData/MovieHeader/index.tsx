@@ -1,12 +1,18 @@
+import moment from 'moment';
+import { useMovieDetails } from '../..';
 import { Container, MovieName, MovieDate } from './styled';
 
 type Props = {};
 
 export default function MovieHeader({}: Props) {
+    const { movieDetails } = useMovieDetails();
+
+    const { title, release_date } = movieDetails!;
+
     return (
         <Container>
-            <MovieName>Thor: Ragnarok</MovieName>
-            <MovieDate>23/04/2002</MovieDate>
+            <MovieName>{title}</MovieName>
+            <MovieDate>{moment(release_date).format('DD/MM/YYYY')}</MovieDate>
         </Container>
     );
 }
