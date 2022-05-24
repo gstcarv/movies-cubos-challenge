@@ -33,7 +33,7 @@ Clone `gstcarv/movies-cubos-challenge/` project
 $ git clone https://github.com/gstcarv/movies-cubos-challenge.git
 ```
 
-Navigate to `empresas-web-client/client` folder
+Navigate to `movies-cubos-challenge/client` folder
 
 ```bash
 $ cd movies-cubos-challenge
